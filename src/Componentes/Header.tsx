@@ -23,7 +23,10 @@ export default function Header({ cart, removeFromCart, increaseQuantity, decreas
                         <div
                             className="carrito"
                         >
-                            <img className="img-fluid" src="/img/carrito.png" alt="imagen carrito" />
+                            <div className='cart-div'>
+                                <img className="img-fluid" src="/img/carrito.png" alt="imagen carrito" />
+                                <span className='cartLength'>{cart.length}</span>
+                            </div>
 
                             <div id="carrito" className="bg-white p-3">
                                 {isEmpty ? <p className="text-center">El carrito esta vacio</p>

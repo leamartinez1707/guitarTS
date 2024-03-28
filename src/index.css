@@ -17,6 +17,10 @@
 
 }
 
+.carrito:hover {
+  cursor: pointer;
+}
+
 .carrito #carrito {
   display: none;
   position: absolute;
@@ -50,6 +54,18 @@
 #carrito .btn-dark {
   padding: 0 2px;
   margin: 0 3px;
+}
+
+.cartLength {
+  display: flex;
+  position: absolute;
+  background-color: #fd7e14;
+  color: white;
+  border-radius: 50%;
+  padding-left: 6px;
+  padding-right: 6px;
+  right: -50%;
+  top: -60%;
 }
 
 .m-0 {
