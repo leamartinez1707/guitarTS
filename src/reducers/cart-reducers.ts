@@ -19,7 +19,7 @@ const initialCart = (): CartItem[] => {
 }
 export const initialState: CartState = {
     data: db,
-    cart: initialCart()
+    cart: initialCart() || []
 }
 const MIN_ITEMS = 1;
 const MAX_ITEMS = 5;

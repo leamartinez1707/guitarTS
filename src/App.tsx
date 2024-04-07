@@ -8,14 +8,15 @@ function App() {
   const [state, dispatch] = useReducer(cartReducer, initialState)
 
   useEffect(() => {
-    localStorage.setItem('cart', JSON.stringify(state.cart))
-  }, [state.cart])
+    localStorage.setItem('cart', JSON.stringify(state!.cart))
+    // eslint-disable-next-line react-hooks/exhaustive-deps
+  }, [state!.cart])
 
 
   return (
     <>
       <Header
-        cart={state.cart}
+        cart={state!.cart}
         dispatch={dispatch}
       />
       <main className="container-xl mt-5">
