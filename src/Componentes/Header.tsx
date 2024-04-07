@@ -1,22 +1,25 @@
-import type { CartItem, Guitar } from '../types/types'
+import { useMemo, Dispatch } from 'react'
+import type { CartItem } from '../types/types'
+import { CartActions } from '../reducers/cart-reducers'
+
 type HeaderProps = {
     cart: CartItem[]
-    removeFromCart: (id: Guitar['id']) => void
-    increaseQuantity: (id: Guitar['id']) => void
-    decreaseQuantity: (id: Guitar['id']) => void
-    clearCart: () => void
-    isEmpty: boolean
-    cartTotal: number
+    dispatch: Dispatch<CartActions>
 }
 
-export default function Header({ cart, removeFromCart, increaseQuantity, decreaseQuantity, clearCart, isEmpty, cartTotal }: HeaderProps) {
+export default function Header({ cart, dispatch }: HeaderProps) {
+
+    // State derivado
+    const isEmpty = useMemo(() => cart.length === 0, [cart])
+    const cartTotal = useMemo(() => cart.reduce((total, item) => total + (item.price * item.quantity), 0), [cart])
+
     return (
         <header className="py-5 header">
             <div className="container-xl">
                 <div className="row justify-content-center justify-content-md-between">
-                    <div className="col-8 col-md-3">
+                    <div className="col-6 col-md-3">
                         <a href="index.html">
-                            <img className="img-fluid" src="/img/logo.svg" alt="imagen logo" />
+                            <img className="img-fluid logo-img" src="/img/header.webp" alt="Logo de header en formato svg" />
                         </a>
                     </div>
                     <nav className="col-md-6 a mt-5 d-flex align-items-start justify-content-end">
@@ -29,7 +32,7 @@ export default function Header({ cart, removeFromCart, increaseQuantity, decreas
                             </div>
 
                             <div id="carrito" className="bg-white p-3">
-                                {isEmpty ? <p className="text-center">El carrito esta vacio</p>
+                                {isEmpty ? <p className="text-center" id='carrito_text'>El carrito esta vacio</p>
                                     :
                                     <>
                                         <table className="w-100 table">
@@ -44,7 +47,8 @@ export default function Header({ cart, removeFromCart, increaseQuantity, decreas
                                             </thead>
                                             <tbody>
                                                 {cart.map(guitar => (
-                                                    <tr key={guitar.id}>
+                                                    <tr key={guitar.id}
+                                                    className='t-body'>
                                                         <td>
                                                             <img className="img-fluid" src={`/img/${guitar.image}.jpg`} alt="imagen guitarra" />
                                                         </td>
@@ -54,7 +58,7 @@ export default function Header({ cart, removeFromCart, increaseQuantity, decreas
                                                         </td>
                                                         <td className="flex align-items-start gap-4">
                                                             <button
-                                                                onClick={() => decreaseQuantity(guitar.id)}
+                                                                onClick={() => dispatch({ type: 'decrease-quanity', payload: { id: guitar.id } })}
                                                                 type="button"
                                                                 className="btn btn-dark"
                                                             >
@@ -62,7 +66,7 @@ export default function Header({ cart, removeFromCart, increaseQuantity, decreas
                                                             </button>
                                                             {guitar.quantity}
                                                             <button
-                                                                onClick={() => increaseQuantity(guitar.id)}
+                                                                onClick={() => dispatch({ type: 'increase-quanity', payload: { id: guitar.id } })}
                                                                 type="button"
                                                                 className="btn btn-dark"
                                                             >
@@ -71,7 +75,7 @@ export default function Header({ cart, removeFromCart, increaseQuantity, decreas
                                                         </td>
                                                         <td>
                                                             <button
-                                                                onClick={() => removeFromCart(guitar.id)}
+                                                                onClick={() => dispatch({ type: 'remove-from-cart', payload: { id: guitar.id } })}
                                                                 className="btn btn-danger"
                                                                 type="button"
                                                             >
@@ -87,7 +91,7 @@ export default function Header({ cart, removeFromCart, increaseQuantity, decreas
                                     </>
                                 }
                                 <button
-                                    onClick={clearCart}
+                                    onClick={() => dispatch({ type: 'clear-cart' })}
                                     className="btn btn-dark w-100 mt-3 p-2">Vaciar Carrito</button>
                             </div>
                         </div>

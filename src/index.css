@@ -1,4 +1,7 @@
 @charset "UTF-8";
+@tailwind base;
+@tailwind components;
+@tailwind utilities;
 
 .fw-black {
   font-weight: 900;
@@ -14,7 +17,12 @@
   max-width: 2rem;
   position: relative;
   z-index: 100;
+  margin-right: 12px;
+}
 
+#carrito_text {
+  font-weight: bold;
+  font-size: large;
 }
 
 .carrito:hover {
@@ -59,7 +67,7 @@
 .cartLength {
   display: flex;
   position: absolute;
-  background-color: #fd7e14;
+  background-color: #dc3545;
   color: white;
   border-radius: 50%;
   padding-left: 6px;
@@ -183,7 +191,7 @@ h1,
   font-family: "Outfit", sans-serif;
   font-weight: 900;
   line-height: 1.2;
-  color: #e99401;
+  color: #dc3545;
 }
 
 h1,
@@ -258,6 +266,12 @@ table {
 th {
   text-align: inherit;
   text-align: -webkit-match-parent;
+}
+
+.t-body td {
+  font-weight: bold;
+  align-content: center;
+
 }
 
 thead,
@@ -355,6 +369,13 @@ button:not(:disabled),
 .img-fluid {
   max-width: 100%;
   height: auto;
+}
+
+.logo-img {
+  max-width: 300px;
+  mask-image: linear-gradient(white 60%,
+      transparent);
+  border-radius: 10%;
 }
 
 
@@ -756,6 +777,10 @@ button:not(:disabled),
   color: rgba(var(--bs-primary-rgb), var(--bs-text-opacity)) !important;
 }
 
+.text-secondary {
+  color: var(--bs-red)
+}
+
 .text-black {
   --bs-text-opacity: 1;
   color: rgba(var(--bs-black-rgb), var(--bs-text-opacity)) !important;
@@ -826,7 +851,7 @@ button:not(:disabled),
 }
 
 .header {
-  background-image: linear-gradient(to right, rgba(0, 0, 0, 0.212), rgba(0, 0, 0, 0.7)), url("/img/headerx22.jpg");
+  background-image: linear-gradient(to right, rgba(0, 0, 0, 0.212), rgba(0, 0, 0, 0.7)), url("/img/headerr.jpg");
   background-position: 50%;
   background-size: cover;
   position: relative;
